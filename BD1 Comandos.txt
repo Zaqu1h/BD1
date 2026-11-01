@@ -1,0 +1,112 @@
+# AULA 1 --------------------------------------------------------------------------------------------------------
+
+CREATE DATABASE aula_20262_BD1
+
+CREATE TABLE CARGO (codigo int, nome varchar(20) not null, primary key(codigo))
+
+CREATE TABLE EMPREGADO (codigo int not null identity, nome varchar(45) not null, sexo char(1) default 'F',
+CPF int unique not null, codcargo int, telefone varchar(10),
+dataatualizacao smalldatetime default getdate(), primary key (codigo),
+foreign key (codcargo) references CARGO(codigo) on update cascade, check (sexo in ('F', 'M')))
+
+# AULA 2 --------------------------------------------------------------------------------------------------------
+
+ALTER TABLE Cargo ADD sigla char(5)
+
+ALTER TABLE Cargo Alter column sigla varchar(10)
+
+ALTER TABLE Cargo DROP column sigla
+
+ALTER TABLE Cargo ADD simb char(1)
+
+ALTER TABLE Cargo ADD CONSTRAINT simbolo check (simb in ('A', 'B', 'C'))
+
+- Desabilitar, habilitar ou apagar uma restrição
+ALTER TABLE Cargo NOCHECK CONSTRAINT símbolo
+ALTER TABLE Cargo CHECK CONSTRAINT símbolo
+ALTER TABLE Cargo DROP CONSTRAINT símbolo
+
+- Alterar o nome de um atributo
+EXEC sp_rename 'cargo.codigo', 'codigonovo', 'COLUMN'
+
+CREATE TABLE Funcao (codigo int not null, nome varchar(20) not null)
+
+ALTER TABLE Funcao ADD CONSTRAINT pk_codigo
+PRIMARY KEY (codigo)
+
+ALTER TABLE EMPREGADO ADD codfuncao int
+
+ALTER TABLE EMPREGADO ADD CONSTRAINT
+fk_codfuncao FOREIGN KEY (coduncao) REFERENCES Funcao(codigo)
+
+INSERT INTO CARGO (codigo, nome, simb) VALUES
+(1, 'ANALISTA', 'A'),
+(2, 'PROFESSOR', 'B'),
+(3, 'PROGRAMADOR', 'C'),
+(4, 'DESIGNER', 'A'),
+(5, 'PESQUISADOR', 'B')
+
+SELECT * FROM CARGO
+
+INSERT INTO Funcao (codigo, nome) VALUES
+(1, 'ANALISAR'),
+(2, 'LECIONAR'),
+(3, 'DESENVOLVER'),
+(4, 'IDEALIZAR'),
+(5, 'PESQUISAR')
+
+SELECT * FROM Funcao 
+
+INSERT Into empregado (nome, sexo, cpf, codcargo, codfuncao, telefone, dataatualizacao) VALUES
+('Isaque', 'M', 0307, 4, 1, 0123456789),
+('Arthur', 'M', 2612, 3, 1, 0123456789),
+('Alex', 'M', 1109, 1, 1, 0123456789),
+('Kaiala', 'F', 3004, 5, 1, 0123456789),
+('Rafael', 'M', 1508, 3, 1, 0123456789)
+
+SELECT * FROM EMPREGADO
+
+# AULA 3 --------------------------------------------------------------------------------------------------------
+
+UPDATE CARGO SET codigo = 10 WHERE codigo = 1
+
+SELECT * FROM CARGO
+
+SELECT * FROM EMPREGADO
+
+SELECT nome, cpf FROM EMPREGADO
+WHERE sexo = 'M' AND codcargo = 10
+
+SELECT nome, cpf FROM EMPREGADO
+WHERE codcargo = 2 or codcargo = 10
+
+SELECT nome, cpf FROM EMPREGADO
+WHERE codcargo = 3 ORDER BY nome
+
+SELECT codcargo, nome FROM EMPREGADO
+ORDER BY codcargo, nome
+
+SELECT codcargo, nome FROM EMPREGADO
+ORDER BY codcargo DESC, nome
+
+SELECT DISTINCT codcargo FROM EMPREGADO
+
+SELECT DISTINCT codcargo, sexo FROM EMPREGADO
+
+ALTER TABLE Cargo ADD salario money
+
+UPDATE CARGO SET codigo = 10 WHERE codigo = 1
+
+UPDATE CARGO SET salario = 5000 WHERE codigo = 2
+
+UPDATE CARGO SET salario = 5500 WHERE codigo = 4
+
+UPDATE CARGO SET salario = 10000 WHERE codigo = 5
+
+UPDATE CARGO SET salario = 11000 WHERE codigo = 3
+
+UPDATE CARGO SET salario = 12000 WHERE codigo = 10
+
+# AULA 4 --------------------------------------------------------------------------------------------------------
+
+Disponível em 03/11/2026
