@@ -93,19 +93,17 @@ SELECT DISTINCT codcargo FROM EMPREGADO
 
 SELECT DISTINCT codcargo, sexo FROM EMPREGADO
 
-ALTER TABLE Cargo ADD salario money
+ALTER TABLE EMPREGADO ADD salario money
 
-UPDATE CARGO SET codigo = 10 WHERE codigo = 1
+UPDATE EMPREGADO SET salario = 5000 WHERE codigo = 2
 
-UPDATE CARGO SET salario = 5000 WHERE codigo = 2
+UPDATE EMPREGADO SET salario = 5500 WHERE codigo = 4
 
-UPDATE CARGO SET salario = 5500 WHERE codigo = 4
+UPDATE EMPREGADO SET salario = 10000 WHERE codigo = 5
 
-UPDATE CARGO SET salario = 10000 WHERE codigo = 5
+UPDATE EMPREGADO SET salario = 11000 WHERE codigo = 3
 
-UPDATE CARGO SET salario = 11000 WHERE codigo = 3
-
-UPDATE CARGO SET salario = 12000 WHERE codigo = 10
+UPDATE EMPREGADO SET salario = 12000 WHERE codigo = 1
 
 # AULA 4 --------------------------------------------------------------------------------------------------------
 
