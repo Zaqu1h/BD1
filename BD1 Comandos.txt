@@ -37,7 +37,7 @@ PRIMARY KEY (codigo)
 ALTER TABLE EMPREGADO ADD codfuncao int
 
 ALTER TABLE EMPREGADO ADD CONSTRAINT
-fk_codfuncao FOREIGN KEY (coduncao) REFERENCES Funcao(codigo)
+fk_codfuncao FOREIGN KEY (codfuncao) REFERENCES Funcao(codigo)
 
 INSERT INTO CARGO (codigo, nome, simb) VALUES
 (1, 'ANALISTA', 'A'),
