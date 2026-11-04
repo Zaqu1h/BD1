@@ -21,13 +21,15 @@ ALTER TABLE Cargo ADD simb char(1)
 
 ALTER TABLE Cargo ADD CONSTRAINT simbolo check (simb in ('A', 'B', 'C'))
 
-- Desabilitar, habilitar ou apagar uma restrição
+{{- Desabilitar, habilitar ou apagar uma restrição
 ALTER TABLE Cargo NOCHECK CONSTRAINT símbolo
 ALTER TABLE Cargo CHECK CONSTRAINT símbolo
 ALTER TABLE Cargo DROP CONSTRAINT símbolo
 
 - Alterar o nome de um atributo
-EXEC sp_rename 'cargo.codigo', 'codigonovo', 'COLUMN'
+EXEC sp_rename 'CARGO.codigo', 'codigonovo', 'COLUMN'}}
+
+{{APAGAR PARTES ENTRE {{}} }}
 
 CREATE TABLE Funcao (codigo int not null, nome varchar(20) not null)
 
@@ -93,7 +95,9 @@ SELECT DISTINCT codcargo FROM EMPREGADO
 
 SELECT DISTINCT codcargo, sexo FROM EMPREGADO
 
-ALTER TABLE EMPREGADO ADD salario money
+ALTER TABLE EMPREGADO ADD salario Money
+
+SELECT * FROM EMPREGADO
 
 UPDATE EMPREGADO SET salario = 5000 WHERE codigo = 2
 
@@ -103,8 +107,55 @@ UPDATE EMPREGADO SET salario = 10000 WHERE codigo = 5
 
 UPDATE EMPREGADO SET salario = 11000 WHERE codigo = 3
 
-UPDATE EMPREGADO SET salario = 12000 WHERE codigo = 1
+UPDATE EMPREGADO SET salario = 12000 WHERE codigo = 10
 
 # AULA 4 --------------------------------------------------------------------------------------------------------
 
-Disponível em 03/11/2026
+SELECT nome, salario AS salario_mensal, codcargo as cargo FROM EMPREGADO
+
+SELECT * FROM EMPREGADO WHERE telefone is null
+
+SELECT nome, salario AS salario_mensal, salario * 12 AS salario_anual FROM EMPREGADO
+
+SELECT EMPREGADO.nome as nome,
+EMPREGADO.codcargo as cargo,
+CARGO.nome as nome_cargo
+FROM EMPREGADO INNER JOIN CARGO
+ON EMPREGADO.codcargo = CARGO.codigo
+
+SELECT EMPREGADO.nome as nome,
+CARGO.nome as nome_cargo,
+funcao.nome as nome_funcao
+FROM EMPREGADO INNER JOIN CARGO
+ON EMPREGADO.codcargo = CARGO.codigo
+INNER JOIN Funcao
+ON EMPREGADO.codfuncao = Funcao.codigo
+
+SELECT e.nome as nome, e.codcargo as cargo,
+c.nome as nome_cargo
+FROM EMPREGADO e LEFT OUTER JOIN CARGO c
+ON e.codcargo = c.codigo
+
+SELECT e.nome as nome,
+c.nome as nome_cargo,
+f.nome as nome_funcao
+FROM EMPREGADO e INNER JOIN CARGO c
+ON e.codcargo = c.codigo
+INNER JOIN Funcao f
+ON e.codfuncao = f.codigo
+
+SELECT e.nome as nome, e.codcargo as cargo,
+c.nome as nome_cargo
+FROM CARGO c LEFT OUTER JOIN EMPREGADO e
+ON e.codcargo = c.codigo
+
+SELECT e.nome as nome, e.codcargo as codigo,
+c.nome as nome_cargo
+FROM EMPREGADO e RIGHT OUTER JOIN CARGO c
+ON e.codcargo = c.codigo
+
+SELECT e.nome as nome, e.codcargo as codigo,
+c.nome as nome_cargo FROM EMPREGADO e
+FULL OUTER JOIN CARGO c ON e.codcargo = c.codigo
+
+# AULA 5 --------------------------------------------------------------------------------------------------------
