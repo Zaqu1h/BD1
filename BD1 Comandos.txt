@@ -159,3 +159,45 @@ c.nome as nome_cargo FROM EMPREGADO e
 FULL OUTER JOIN CARGO c ON e.codcargo = c.codigo
 
 # AULA 5 --------------------------------------------------------------------------------------------------------
+
+SELECT COUNT(*) FROM EMPREGADO
+SELECT COUNT(distinct sexo) FROM EMPREGADO
+
+SELECT SUM(salario) FROM EMPREGADO
+
+SELECT MAX(salario) FROM EMPREGADO
+
+SELECT MIN(salario) FROM EMPREGADO
+
+SELECT AVG(salario) FROM EMPREGADO
+
+SELECT sexo, AVG(salario) as media_salarial
+FROM EMPREGADO
+GROUP BY sexo
+
+SELECT codcargo, sexo, AVG(salario)
+FROM EMPREGADO
+GROUP BY codcargo, sexo
+
+SELECT codcargo, sexo, AVG(salario)
+FROM EMPREGADO
+GROUP BY codcargo, sexo
+HAVING codcargo > 2
+
+SELECT codcargo, sexo, AVG(salario) as media_salarial
+FROM EMPREGADO
+WHERE salario > 8000.00
+GROUP BY codcargo, sexo
+HAVING codcargo > 2
+
+SELECT nome FROM EMPREGADO WHERE nome LIKE 'A%'
+
+SELECT nome FROM EMPREGADO WHERE nome LIKE '_A%'
+
+SELECT nome FROM EMPREGADO WHERE nome LIKE '[H-K]%'
+
+SELECT nome FROM EMPREGADO WHERE nome LIKE '[^H-K]%'
+
+SELECT CONCAT (nome, ', ', sexo, ', ', CPF, ', ', telefone, ', ',  cast(salario as varchar(12))) as Dados FROM EMPREGADO
+
+# AULA 6 --------------------------------------------------------------------------------------------------------
