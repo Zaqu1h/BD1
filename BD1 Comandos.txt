@@ -200,4 +200,23 @@ SELECT nome FROM EMPREGADO WHERE nome LIKE '[^H-K]%'
 
 SELECT CONCAT (nome, ', ', sexo, ', ', CPF, ', ', telefone, ', ',  cast(salario as varchar(12))) as Dados FROM EMPREGADO
 
+SELECT nome, salario FROM EMPREGADO
+WHERE (salario BETWEEN 5500 AND 11000)
+
+CREATE VIEW EMP_CARG_FUN
+AS
+SELECT e.codigo, e.nome, e.salario,
+e.salario * 12 AS salario_anual, c.codigo AS cod_cargo, c.nome AS nome_cargo,
+e.codfuncao as cod_funcao, f.nome AS nome_funcao
+FROM EMPREGADO e INNER JOIN CARGO c
+ON e.codcargo = c.codigo
+INNER JOIN Funcao f
+ON e.codfuncao = f.codigo
+
+SELECT * FROM EMP_CARG_FUN
+
+SELECT nome, nome_cargo, nome_funcao
+FROM EMP_CARG_FUN
+WHERE cod_cargo >= 4
+
 # AULA 6 --------------------------------------------------------------------------------------------------------
